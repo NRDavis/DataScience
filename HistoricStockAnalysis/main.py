@@ -57,6 +57,9 @@ def plotVar(numArr, string):
     if not string.lower() in varDict:
         print("Variable not defined - cannot search data")
         return          # if we don't receive an acceptable input string, we print a statement are return
+    elif string.lower() == "date":
+        print("There is not point in displaying the date variable graphically")
+        return
 
     itemList = []   # list
     rangeList = []
@@ -69,7 +72,7 @@ def plotVar(numArr, string):
     plt.ylabel(revDict.get(varDict.get(string)))
     plt.xticks([min(rangeList), max(rangeList)])
     plt.yticks([min(itemList), max(itemList)])
-    plt.show()
+    plt.show()                                      # we display the item
     return
 
 
@@ -80,5 +83,5 @@ fileName = searchStocks(sym)
 b = readData(fileName)
 
 # when given a symbol by the user, we want to keep the processed data around
-plotVar(b, "Open")
+plotVar(b, "Openint")
 
