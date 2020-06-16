@@ -1,7 +1,7 @@
 import numpy as np  # used for array manipulation
 import matplotlib   # used for making visuals
 import os           # used for accessing files and data
-import csv
+import csv          # used to read data from .txt/.csv files
 
 
 '''
@@ -23,7 +23,7 @@ cwd = os.getcwd()       # we save the current working directory (cwd) to a strin
 
     # we search for a symbol name within our Stocks Folder, if it exists, we return path, else return none
 def searchStocks(symbol):
-    symPath = os.path.join(cwd + os.sep, Stocks, symbol.lower()+".us.txt")        #os.sep determines the best
+    symPath = os.path.join(os.getcwd() + os.sep, "Stocks", symbol.lower()+".us.txt")        #os.sep determines the best
     if not os.path.isfile(symPath):
         print("File "+symPath+" does not exist")
         return None
@@ -32,7 +32,7 @@ def searchStocks(symbol):
 
     # if data for the symbol exists - return path. Else, print statement and return None
 def searchETFs(symbol):
-    symPath = os.path.join(cwd + os.sep, ETFs, symbol.lower() +".us.txt")
+    symPath = os.path.join(os.getcwd() + os.sep, "ETFs", symbol.lower() +".us.txt")
     if not os.path.isfile(symPath):
         print("File "+symPath+" does not exist")
         return None
@@ -45,24 +45,18 @@ Data follows the format of:
     
     We'll use the searchStocks() or searchETFs() functions to provide our path names
 '''
-def processData(pathName):
+def readData(pathName):
     # we process our data using the with block because that'll terminate the open() with a close() when done
     with open(pathName, 'r') as reader:
         day = list(csv.reader(reader))      # we create an array of list objects
-        #print(len(day))
-        #for i in range(0,len(day)):
-        #   print(day[i][0])
         return np.array(day[1:])        # returns numpy array, skips first row including column names
+
+
 
 print("Enter a stock symbol:")
 sym = input()
 fileName = searchStocks(sym)
-b = processData(fileName)
-
-print("we've obtained our numpy array.")
-for i in range(0, 20):
-    print(b[i])
-
+b = readData(fileName)
 
 
 
