@@ -73,15 +73,43 @@ def plotVar(numArr, string):
     plt.xticks([min(rangeList), max(rangeList)])
     plt.yticks([min(itemList), max(itemList)])
     plt.show()                                      # we display the item
+    #plt.savefig(+".png")
+    return
+
+def plotSave(numArr, string, symbol):
+    varDict = {"date": 0, "open": 1, "high": 2, "low": 3, "close": 4, "volume": 5, "openint": 6}
+    revDict = {0: "Date", 1: "Open", 2: "High", 3: "Low", 4: "Close", 5: "Volume", 6: "OpenInt"}
+
+    if not string.lower() in varDict:
+        print("Variable not defined - cannot search data")
+        return          # if we don't receive an acceptable input string, we print a statement are return
+    elif string.lower() == "date":
+        print("There is not point in displaying the date variable graphically")
+        return
+
+    itemList = []   # list
+    rangeList = []
+
+    for i in range(0, len(numArr)):
+        itemList.append(float(numArr[i][varDict.get(string.lower())]))
+        rangeList.append(i)
+
+    plt.plot(rangeList, itemList)
+    plt.ylabel(revDict.get(varDict.get(string)))
+    plt.xticks([min(rangeList), max(rangeList)])
+    plt.yticks([min(itemList), max(itemList)])
+    save = str(symbol) + ".png"
+    plt.savefig(save)
     return
 
 
-
 inp = "going"
+
 while inp != "q":
     print("Enter a stock symbol:")
     inp = input()
     fileName = searchStocks(inp)
     b = readData(fileName)
     # when given a symbol by the user, we want to keep the processed data around
-    plotVar(b, "Open")
+    #plotVar(b, "Open")
+    plotSave(b, "Open", inp)
