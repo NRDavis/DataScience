@@ -77,11 +77,11 @@ def plotVar(numArr, string):
 
 
 
-print("Enter a stock symbol:")
-sym = input()
-fileName = searchStocks(sym)
-b = readData(fileName)
-
-# when given a symbol by the user, we want to keep the processed data around
-plotVar(b, "Openint")
-
+inp = "going"
+while inp != "q":
+    print("Enter a stock symbol:")
+    inp = input()
+    fileName = searchStocks(inp)
+    b = readData(fileName)
+    # when given a symbol by the user, we want to keep the processed data around
+    plotVar(b, "Open")
