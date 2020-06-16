@@ -51,15 +51,23 @@ def readData(pathName):
 
 
 def plotVar(numArr, string):
-    #print(b[0:20])
     varDict = {"date": 0, "open": 1, "high": 2, "low": 3, "close": 4, "volume": 5, "openint": 6}
-    itemList = []   # list
-    for i in range(0,20):
-        print(numArr[i][varDict.get(string.lower())])
-        itemList.append(numArr[i][varDict.get(string.lower())])
+    revDict = {0: "Date", 1: "Open", 2: "High", 3: "Low", 4: "Close", 5: "Volume", 6: "OpenInt"}
 
-    plt.plot(itemList)
-    plt.ylabel("some number's")
+    itemList = []   # list
+    rangeList = []
+
+    for i in range(0, len(numArr)):
+        #print(numArr[i][varDict.get(string.lower())])
+        itemList.append(numArr[i][varDict.get(string.lower())])
+        rangeList.append(i)
+
+    plt.plot(rangeList, itemList)
+    plt.ylabel(revDict.get(varDict.get(string)))
+    plt.xticks([min(rangeList), max(rangeList)])
+    plt.yticks([min(itemList), max(itemList)])
+    #print(min(itemList))
+    #print(max(itemList))
     plt.show()
     return
 
@@ -70,6 +78,6 @@ sym = input()
 fileName = searchStocks(sym)
 b = readData(fileName)
 
-
 # when given a symbol by the user, we want to keep the processed data around
 plotVar(b, "open")
+
