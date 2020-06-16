@@ -1,6 +1,5 @@
-import numpy as np
-import matplotlib
-
+import numpy as np  # used for array manipulation
+import matplotlib   # used for making visuals
 import os           # used for accessing files and data
 
 
@@ -18,37 +17,33 @@ Data = "Data"
 cwd = os.getcwd()       # we save the current working directory (cwd) to a string
                         # from the cwd, we can obtain open the Stocks or ETFs folders
 
-#print(os.path.join(cwd + os.sep, Stocks))
-                        # This demonstrates how we can make filepaths using os.path methods
-
 # each of the stock documents within our folder is given by it's symbolic name as follows
 #       "<symbol-name>.us.txt"
 
     # we search for a symbol name within our Stocks Folder, if it exists, we return path, else return none
 def searchStocks(symbol):
-    symPath = os.path.join(cwd + os.sep, Stocks, symbol+".us.txt")        #os.sep determines the best
+    symPath = os.path.join(cwd + os.sep, Stocks, symbol.lower()+".us.txt")        #os.sep determines the best
     if not os.path.isfile(symPath):
-        print("File does not exist")
+        print("File "+symPath+" does not exist")
         return None
     else:
         return symPath      # returns proper path to respective stock
 
     # if data for the symbol exists - return path. Else, print statement and return None
 def searchETFs(symbol):
-    symPath = os.path.join(cwd + os.sep, ETFs, symbol+".us.txt")
+    symPath = os.path.join(cwd + os.sep, ETFs, symbol.lower() +".us.txt")
     if not os.path.isfile(symPath):
-        print("File does not exist")
+        print("File "+symPath+" does not exist")
         return None
     else:
         return symPath
 
 
 
+#print("Enter stock symbol:")
+#sym = input()
+
 #print("This is the current working directory:"+cwd)
 print("Enter a stock symbol: ")
 sym = input()
 print(searchStocks(sym))
-
-print("\n\nEnter an ETF symbol:")
-etf = input()
-print(searchETFs(etf))
