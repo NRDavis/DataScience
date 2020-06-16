@@ -1,5 +1,5 @@
 import numpy as np  # used for array manipulation
-import matplotlib   # used for making visuals
+import matplotlib.pyplot as plt   # used for making visuals
 import os           # used for accessing files and data
 import csv          # used to read data from .txt/.csv files
 
@@ -47,6 +47,23 @@ def readData(pathName):
         return np.array(day[1:])        # returns numpy array, skips first row including column names
 
 
+# we define a dictionary in a manner similar to cpp enumerations
+
+
+def plotVar(numArr, string):
+    #print(b[0:20])
+    varDict = {"date": 0, "open": 1, "high": 2, "low": 3, "close": 4, "volume": 5, "openint": 6}
+    itemList = []   # list
+    for i in range(0,20):
+        print(numArr[i][varDict.get(string.lower())])
+        itemList.append(numArr[i][varDict.get(string.lower())])
+
+    plt.plot(itemList)
+    plt.ylabel("some number's")
+    plt.show()
+    return
+
+
 
 print("Enter a stock symbol:")
 sym = input()
@@ -54,5 +71,5 @@ fileName = searchStocks(sym)
 b = readData(fileName)
 
 
-
-
+# when given a symbol by the user, we want to keep the processed data around
+plotVar(b, "open")
