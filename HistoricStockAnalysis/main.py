@@ -45,18 +45,25 @@ Data follows the format of:
     
     We'll use the searchStocks() or searchETFs() functions to provide our path names
 '''
-def readData(pathName):
+def processData(pathName):
     # we process our data using the with block because that'll terminate the open() with a close() when done
     with open(pathName, 'r') as reader:
         day = list(csv.reader(reader))      # we create an array of list objects
-        print(len(day))
-        for i in range(0,21):
-            print(day[i])
+        #print(len(day))
+        #for i in range(0,len(day)):
+        #   print(day[i][0])
+        return np.array(day[1:])        # returns numpy array, skips first row including column names
 
-print("Enter a stock symbol")
+print("Enter a stock symbol:")
 sym = input()
 fileName = searchStocks(sym)
-readData(fileName)
-#print(day[:3])
+b = processData(fileName)
+
+print("we've obtained our numpy array.")
+for i in range(0, 20):
+    print(b[i])
+
+
+
 
 
