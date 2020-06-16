@@ -98,7 +98,7 @@ def plotSave(numArr, string, symbol):
     plt.ylabel(revDict.get(varDict.get(string)))
     plt.xticks([min(rangeList), max(rangeList)])
     plt.yticks([min(itemList), max(itemList)])
-    save = str(symbol) + ".png"
+    save = str(symbol.upper()) +"-"+str(string)+ ".png"
     plt.savefig(save)
     return
 
@@ -112,4 +112,4 @@ while inp != "q":
     b = readData(fileName)
     # when given a symbol by the user, we want to keep the processed data around
     #plotVar(b, "Open")
-    plotSave(b, "Open", inp)
+    plotSave(b, "Volume", inp)
