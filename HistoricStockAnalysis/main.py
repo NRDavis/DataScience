@@ -1,6 +1,7 @@
 import numpy as np  # used for array manipulation
 import matplotlib   # used for making visuals
 import os           # used for accessing files and data
+import csv
 
 
 '''
@@ -42,20 +43,20 @@ def searchETFs(symbol):
 Data follows the format of:
     Date,Open,High,Low,Close,Volume,OpenInt
     
-    We'll use the searchStocks() or searchETFs() functiosn to provide our path names
-    
+    We'll use the searchStocks() or searchETFs() functions to provide our path names
 '''
 def readData(pathName):
     # we process our data using the with block because that'll terminate the open() with a close() when done
     with open(pathName, 'r') as reader:
-        print(reader.readline())  # we read a line at a time
-        print(reader.readline())
-
-
+        day = list(csv.reader(reader))      # we create an array of list objects
+        print(len(day))
+        for i in range(0,21):
+            print(day[i])
 
 print("Enter a stock symbol")
 sym = input()
-readData(searchStocks(sym))
-
+fileName = searchStocks(sym)
+readData(fileName)
+#print(day[:3])
 
 
