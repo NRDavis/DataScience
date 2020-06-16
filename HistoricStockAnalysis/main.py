@@ -38,12 +38,24 @@ def searchETFs(symbol):
     else:
         return symPath
 
+'''
+Data follows the format of:
+    Date,Open,High,Low,Close,Volume,OpenInt
+    
+    We'll use the searchStocks() or searchETFs() functiosn to provide our path names
+    
+'''
+def readData(pathName):
+    # we process our data using the with block because that'll terminate the open() with a close() when done
+    with open(pathName, 'r') as reader:
+        print(reader.readline())  # we read a line at a time
+        print(reader.readline())
 
 
-#print("Enter stock symbol:")
-#sym = input()
 
-#print("This is the current working directory:"+cwd)
-print("Enter a stock symbol: ")
+print("Enter a stock symbol")
 sym = input()
-print(searchStocks(sym))
+readData(searchStocks(sym))
+
+
+
