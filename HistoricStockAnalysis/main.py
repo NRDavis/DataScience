@@ -59,15 +59,14 @@ def plotVar(numArr, string):
 
     for i in range(0, len(numArr)):
         #print(numArr[i][varDict.get(string.lower())])
-        itemList.append(numArr[i][varDict.get(string.lower())])
+        itemList.append(float(numArr[i][varDict.get(string.lower())]))
         rangeList.append(i)
 
+    print(itemList)
     plt.plot(rangeList, itemList)
     plt.ylabel(revDict.get(varDict.get(string)))
     plt.xticks([min(rangeList), max(rangeList)])
     plt.yticks([min(itemList), max(itemList)])
-    #print(min(itemList))
-    #print(max(itemList))
     plt.show()
     return
 
